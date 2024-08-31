@@ -1,0 +1,40 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>pl.becmer.dev.mdbook</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>MarkdownBook</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="kamil.becmer@gmail.com" url="https://github.com/becmer">Kamil Becmer</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    <h1>Integrate <strong>mdBook</strong> into your JetBrains IDE.</h1>
+
+    <p>This plugin provides essential features for working with mdBook projects directly within your IDE:</p>
+
+    <ul>
+    <li>Autodiscovery: Automatically detects your mdBook binary and project book location.</li>
+    <li>Configuration: Customize mdBook settings and parameters.</li>
+    <li>Live Preview: Launch and manage the <code>mdbook serve</code> instance for real-time previews.</li>
+    <li>Embedded Browser: View your beautifully rendered mdBook documentation right within the IDE.</li>
+    </ul>
+
+    <p><strong>Streamline your documentation workflow and focus on creating high-quality content with the MarkdownBook plugin.</strong></p>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+</idea-plugin>
