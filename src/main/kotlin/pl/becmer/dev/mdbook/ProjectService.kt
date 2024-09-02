@@ -12,7 +12,7 @@ private val LOG = logger<ProjectService>()
 class ProjectService(project: Project) : Disposable {
     init {
         LOG.info("Initializing")
-        val bookTomlManager = PluginService.getInstance().getBookTomlManager()
+        val bookTomlManager = PluginService.bookTomlManager
         val index = ProjectFileIndex.getInstance(project)
         index.iterateContent {
             bookTomlManager.tryUpdate(it)
