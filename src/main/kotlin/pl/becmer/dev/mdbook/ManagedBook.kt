@@ -1,6 +1,10 @@
 package pl.becmer.dev.mdbook
 
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.ProjectFileIndex
 import com.intellij.openapi.vfs.VirtualFile
+import com.intellij.util.messages.Topic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -19,7 +23,13 @@ class ManagedBook private constructor(
     private val guard = Mutex()
     private var state: State = State.Stopped
 
+    val name: String = toml.parent.name
+
     companion object {
+        val TOPIC: Topic<Listener> = Topic.create("mdbook", Listener::class.java)
+
+        internal val publisher: Listener = ApplicationManager.getApplication().messageBus.syncPublisher(TOPIC)
+
         fun create(toml: VirtualFile): ManagedBook? {
             val path = toml.parent?.let { it.fileSystem.getNioPath(it) } ?: return null
             return ManagedBook(toml, path)
@@ -43,32 +53,30 @@ class ManagedBook private constructor(
                 null
             }
         }?.let { process ->
-            val isRunning = withTimeoutOrNull(readyTimeout) {
+            withTimeoutOrNull(readyTimeout) {
                 waitUntilReady(process)
-            } ?: false
-
-            if (!isRunning) {
-                process.stop()
-            }
+            }?.let { portNumber ->
+                publisher.bookServed(this, portNumber)
+            } ?: process.stop()
         }
     }
 
-    private suspend fun waitUntilReady(process: ManagedProcess): Boolean = withContext(Dispatchers.IO) {
+    private suspend fun waitUntilReady(process: ManagedProcess): Int? = withContext(Dispatchers.IO) {
         val pattern = Regex("""listening on http://\[::1]:(\d+)""")
 
         process.stdout.bufferedReader().useLines { lines ->
             for (line in lines) {
-                pattern.find(line)?.groups?.get(1)?.value?.toIntOrNull()?.let {
+                pattern.find(line)?.groups?.get(1)?.value?.toIntOrNull()?.let { portNumber ->
                     guard.withLock {
                         if (state is State.Starting) {
-                            state = State.Running(process, it)
-                            return@useLines true
+                            state = State.Running(process, portNumber)
+                            return@useLines portNumber
                         }
                     }
-                    return@useLines false
+                    return@useLines null
                 }
             }
-            false
+            null
         }
     }
 
@@ -88,5 +96,15 @@ class ManagedBook private constructor(
             is Starting -> process
             is Stopped -> null
         }
+    }
+
+    fun isInProject(project: Project): Boolean = ProjectFileIndex.getInstance(project).isInProject(toml)
+
+    interface Listener {
+        fun bookAdded(book: ManagedBook) {}
+
+        fun bookServed(book: ManagedBook, portNumber: Int) {}
+
+        fun bookRemoved(book: ManagedBook) {}
     }
 }

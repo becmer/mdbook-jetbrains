@@ -6,9 +6,7 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent
 
 internal class BookTomlListener : AsyncFileListener, Disposable {
-    override fun dispose() {
-
-    }
+    override fun dispose() {}
 
     override fun prepareChange(events: MutableList<out VFileEvent>): AsyncFileListener.ChangeApplier? {
         val bookTomlEvents = events.mapNotNull { it.file?.takeIf(VirtualFile::isBookToml) }

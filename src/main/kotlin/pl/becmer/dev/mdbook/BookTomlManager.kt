@@ -74,6 +74,7 @@ class BookTomlManager : Disposable {
     private fun addBook(toml: VirtualFile): ManagedBookRequest? {
         return ManagedBook.create(toml)?.let {
             managedBooks[toml] = it
+            ManagedBook.publisher.bookAdded(it)
             LOG.info("Book added: ${toml.path}")
             ManagedBookRequest.Start(it)
         } ?: run {
@@ -84,6 +85,7 @@ class BookTomlManager : Disposable {
 
     private fun removeBook(bookToml: VirtualFile): ManagedBookRequest? {
         return managedBooks.remove(bookToml)?.let {
+            ManagedBook.publisher.bookRemoved(it)
             LOG.info("Book removed: ${bookToml.path}")
             ManagedBookRequest.Stop(it)
         }

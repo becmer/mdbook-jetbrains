@@ -36,5 +36,12 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <postStartupActivity implementation="pl.becmer.dev.mdbook.StartupActivity"/>
+        <toolWindow id="Books" anchor="right" icon="/images/toolWindow.svg"
+                    factoryClass="pl.becmer.dev.mdbook.ToolWindowFactory"/>
     </extensions>
+
+    <projectListeners>
+        <listener class="pl.becmer.dev.mdbook.ToolWindowFactory$ManagedBookListener"
+                  topic="pl.becmer.dev.mdbook.ManagedBook$Listener"/>
+    </projectListeners>
 </idea-plugin>
