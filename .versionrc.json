@@ -1,0 +1,4 @@
+{
+  "packageFiles": ["build.gradle.kts"],
+  "bumpFiles": ["build.gradle.kts"]
+}
