@@ -1,3 +1,4 @@
+<!-- BEGIN PLUGIN DESCRIPTION -->
 Integrate [mdbook](https://rust-lang.github.io/mdBook/) into your JetBrains IDE.
 
 This plugin provides essential features for working with mdBook projects directly within your IDE:
@@ -26,3 +27,4 @@ Caveats:
 - Browser State: Preserve cookies, e.g., to preserve selected theme.
 - Configuration: Allow customizing mdBook settings and parameters.
 - Autodiscovery: Automatic detection of the mdBook binary.
+<!-- END PLUGIN DESCRIPTION -->
