@@ -12,6 +12,7 @@
 - Migrate to the [Keep a Changelog](https://keepachangelog.com) convention
 - Update the minimum supported platform version to `2023.3.7` (`233-242.*`)
 - Refactor the scaffold to support [dynamic plugins](https://plugins.jetbrains.com/docs/intellij/dynamic-plugins.html) from the ground up
+- Update the plugin icon with a colored gradient version
 
 ## [2024.1.0] - 2024-09-03
 

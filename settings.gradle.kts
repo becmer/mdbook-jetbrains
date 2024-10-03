@@ -6,3 +6,6 @@ pluginManagement {
 }
 
 rootProject.name = "mdbook-jetbrains"
+
+include(":intellij-plugin")
+

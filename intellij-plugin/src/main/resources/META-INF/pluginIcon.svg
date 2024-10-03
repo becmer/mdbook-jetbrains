@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.1"
+     id="pluginMarkdownBook"
+     viewBox="0 0 40 40"
+     width="40"
+     height="40">
+
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="75%" y2="120%">
+            <stop offset="0%" style="stop-color:#00B4DB; stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#BB2BFF; stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="fgGradient" x1="0%" y1="0%" x2="75%" y2="150%">
+            <stop offset="20%" style="stop-color:#00596D; stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#6B1991; stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <rect fill="url(#bgGradient)" fill-opacity="1" stroke="none" width="30" height="36" x="5" y="2"/>
+    <path fill="none" stroke="#FFFFFF66" stroke-width="1"
+          d="M 12,5 H 32 V 35 H 12 Z"/>
+    <path fill="url(#fgGradient)" fill-opacity="1" stroke="none" opacity="0.7"
+          d="M 5,2 V 38 H 35 V 2 Z m 7,3 H 32 V 35 H 12 Z m 3,7 v 3 h 14 v -3 z m 3,6 v 3 h 11 v -3 z"/>
+</svg>
