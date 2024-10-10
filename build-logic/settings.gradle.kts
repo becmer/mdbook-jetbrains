@@ -1,32 +1,25 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.jetbrains.intellij.platform.gradle.extensions.intellijPlatform
-
-
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         mavenCentral()
     }
 }
 
-plugins {
-    id("pl.becmer.gradle.settings")
-}
-
 dependencyResolutionManagement {
     repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 
     repositories {
+        gradlePluginPortal()
         mavenCentral()
+    }
 
-        intellijPlatform {
-            defaultRepositories()
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
         }
     }
 }
 
-rootProject.name = "mdbook-jetbrains"
-
-include(":intellij-plugin")
+rootProject.name = "build-logic"

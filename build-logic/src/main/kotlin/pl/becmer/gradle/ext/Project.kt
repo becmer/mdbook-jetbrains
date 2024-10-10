@@ -1,4 +1,6 @@
-package pl.becmer.dev.gradle
+@file:Suppress("unused")
+
+package pl.becmer.gradle.ext
 
 import org.gradle.api.Project
 

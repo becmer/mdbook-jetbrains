@@ -1,8 +1,11 @@
-package pl.becmer.dev.gradle
+@file:Suppress("unused")
+
+package pl.becmer.gradle.ext
 
 import org.gradle.api.provider.Provider
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.ChangelogPluginExtension
+
 
 abstract class CommonPluginExtension(
     val changelog: ChangelogPluginExtension,

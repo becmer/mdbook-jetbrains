@@ -1,29 +1,10 @@
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
-import pl.becmer.dev.gradle.common
+import pl.becmer.gradle.ext.common
 
 plugins {
-    id("pl.becmer.dev.gradle.common")
     id("java")
-    alias(libs.plugins.kotlin)
-    alias(libs.plugins.intelliJPlatform)
-    alias(libs.plugins.qodana)
-    alias(libs.plugins.kover)
-}
-
-// Set the JVM language level used to build the project.
-kotlin {
-    jvmToolchain(17)
-}
-
-// Configure project's dependencies
-repositories {
-    mavenCentral()
-
-    // IntelliJ Platform Gradle Plugin Repositories Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
-    intellijPlatform {
-        defaultRepositories()
-    }
+    id("pl.becmer.gradle.module.intellij")
 }
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
@@ -105,21 +86,4 @@ intellijPlatform {
     // Enabled explicitly just in case something interfered with the default.
     // Refer to https://plugins.jetbrains.com/docs/intellij/ide-development-instance.html#intellij-platform-gradle-plugin-2x
     autoReload = true
-}
-
-// Configure Gradle Kover Plugin - read more: https://github.com/Kotlin/kotlinx-kover#configuration
-kover {
-    reports {
-        total {
-            xml {
-                onCheck = true
-            }
-        }
-    }
-}
-
-tasks {
-    publishPlugin {
-//        dependsOn(patchChangelog)
-    }
 }

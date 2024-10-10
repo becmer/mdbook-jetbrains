@@ -1,6 +1,6 @@
 plugins {
     idea
-    id("pl.becmer.dev.gradle.common")
+    id("pl.becmer.gradle.project")
 }
 
 group = providers.gradleProperty("pluginGroup").get()
